@@ -1,0 +1,10 @@
+{
+    "Windows Server": {
+        "How do I install Windows Server?": "To install Windows Server, start by inserting the installation media and booting from it...",
+        "How do I create a virtual machine in Hyper-V?": "To create a VM in Hyper-V, open Hyper-V Manager and follow the wizard..."
+    },
+    "Office 365": {
+        "How do I create a new user in Office 365?": "Log in to the Microsoft 365 admin center and navigate to Users > Active users...",
+        "How do I reset a password in Office 365?": "Go to the Users section in the Microsoft 365 admin center, select the user, and click Reset password..."
+    }
+}

@@ -1,0 +1,116 @@
+General Server Management
+What is a server?
+
+Answer: A server is a computer or system that provides resources, data, services, or programs to other computers, known as clients, over a network.
+What are the different types of servers?
+
+Answer: Common types of servers include web servers, application servers, database servers, file servers, mail servers, and domain controllers.
+What is the purpose of a domain controller?
+
+Answer: A domain controller (DC) is a server that manages security and permissions within a Windows domain. It stores user account information and enforces security policies.
+How do you install and configure a DNS server?
+
+Answer: DNS (Domain Name System) translates domain names into IP addresses. Installing a DNS server involves installing the DNS role on a Windows Server and configuring forward and reverse lookup zones.
+What is DHCP, and why is it important?
+
+Answer: DHCP (Dynamic Host Configuration Protocol) automatically assigns IP addresses to devices on a network. It simplifies network management by dynamically allocating IP addresses as devices join the network.
+How do you create and manage user accounts in a server environment?
+
+Answer: User accounts can be created and managed using tools like Active Directory Users and Computers (ADUC) on a Windows Server. You can create users, assign permissions, and configure profiles.
+What is the difference between a local user account and a domain user account?
+
+Answer: A local user account is stored on a specific computer and can only log in to that computer. A domain user account is stored on a domain controller and can log in to any computer within the domain.
+How do you implement file sharing on a server?
+
+Answer: File sharing can be implemented by creating shared folders on the server, setting appropriate permissions, and configuring network access.
+What are NTFS permissions, and how do they differ from share permissions?
+
+Answer: NTFS permissions are applied at the file system level and control access to files and folders. Share permissions are applied at the network share level and control access to shared folders over the network.
+How do you back up and restore a server?
+
+Answer: Backing up a server involves creating copies of its data and configurations using tools like Windows Server Backup. Restoration involves using the backup files to restore the server's state.
+Networking
+What is an IP address, and why is it important?
+
+Answer: An IP address is a unique identifier for a device on a network. It is essential for routing data between devices on different networks.
+What is the difference between IPv4 and IPv6?
+
+Answer: IPv4 uses a 32-bit address format, providing around 4.3 billion unique addresses. IPv6 uses a 128-bit address format, providing a vastly larger address space.
+What is a subnet mask, and how does it work?
+
+Answer: A subnet mask is used to divide an IP address into a network and host portion, helping to identify the subnet to which an IP address belongs.
+What is the role of a router in a network?
+
+Answer: A router forwards data packets between different networks, enabling communication between devices on different IP networks.
+What is a VLAN, and why would you use it?
+
+Answer: A VLAN (Virtual Local Area Network) is a logical subdivision of a physical network, allowing devices to be grouped together even if they are not on the same physical network. It is used to improve security and reduce broadcast traffic.
+How do you configure a static IP address on a server?
+
+Answer: A static IP address can be configured through the server's network settings by manually entering the IP address, subnet mask, default gateway, and DNS server information.
+What is port forwarding, and how is it configured?
+
+Answer: Port forwarding directs traffic from a specific port on a router to a specific device on the network. It is configured in the router's settings.
+What is NAT, and how does it work?
+
+Answer: NAT (Network Address Translation) translates private IP addresses on a local network to a single public IP address for communication with external networks.
+How do you configure DNS forwarding?
+
+Answer: DNS forwarding is configured on a DNS server to forward queries it cannot resolve locally to another DNS server, such as an ISP's DNS server.
+What is a DMZ, and why is it used?
+
+Answer: A DMZ (Demilitarized Zone) is a separate network segment that isolates external-facing servers from the internal network, providing an additional layer of security.
+Security
+What are the basic principles of server security?
+
+Answer: Basic server security principles include regular patching, minimizing installed software, using strong authentication mechanisms, implementing firewalls, and monitoring logs.
+How do you secure a server with a firewall?
+
+Answer: A server can be secured with a firewall by configuring rules to allow or deny traffic based on IP addresses, ports, and protocols. Firewalls can be hardware or software-based.
+What is encryption, and how is it used in server management?
+
+Answer: Encryption converts data into a secure format that can only be read by authorized users. It is used in server management to protect sensitive data, both at rest and in transit.
+How do you configure SSL/TLS on a web server?
+
+Answer: SSL/TLS can be configured on a web server by obtaining a certificate from a trusted Certificate Authority (CA) and configuring the server to use the certificate for HTTPS connections.
+What is multi-factor authentication (MFA), and why is it important?
+
+Answer: MFA requires users to provide two or more verification factors to gain access to a resource. It enhances security by adding an additional layer of protection beyond just a password.
+How do you manage user permissions on a server?
+
+Answer: User permissions are managed using tools like Active Directory for Windows servers, where permissions are assigned based on roles, groups, and access requirements.
+What is a security group, and how is it used in server management?
+
+Answer: A security group is a collection of user accounts with similar security privileges. It is used to simplify the management of permissions by assigning the group to resources rather than individual users.
+What is the principle of least privilege, and why is it important?
+
+Answer: The principle of least privilege ensures that users and applications are granted the minimum level of access necessary to perform their tasks, reducing the risk of unauthorized access or accidental damage.
+How do you implement a password policy on a server?
+
+Answer: A password policy can be implemented using Group Policy in Windows Server, where you can enforce password length, complexity, expiration, and history requirements.
+What is a brute-force attack, and how can it be prevented?
+
+Answer: A brute-force attack involves trying all possible combinations of passwords to gain unauthorized access. It can be prevented by implementing account lockout policies, using CAPTCHA, and employing MFA.
+Virtualization
+What is virtualization, and why is it used?
+
+Answer: Virtualization is the creation of a virtual version of something, such as a server, storage device, or network resource. It is used to increase resource utilization, reduce hardware costs, and improve scalability.
+What is a hypervisor, and what are its types?
+
+Answer: A hypervisor is software that creates and manages virtual machines. There are two types: Type 1 (bare-metal) hypervisors run directly on the hardware, while Type 2 hypervisors run on a host operating system.
+How do you create a virtual machine (VM)?
+
+Answer: A virtual machine can be created using a hypervisor like VMware ESXi or Microsoft Hyper-V. The process involves defining the VM’s hardware resources, such as CPU, memory, and storage, and installing an operating system.
+What is VM snapshot, and how is it used?
+
+Answer: A VM snapshot is a point-in-time copy of a virtual machine's state, including its memory, disk, and settings. It is used to create backups, perform upgrades, or test changes without affecting the production environment.
+What is the difference between thin and thick provisioning?
+
+Answer: In thin provisioning, storage is allocated to a VM on demand, as it is needed. In thick provisioning, the full amount of storage is allocated to the VM at the time of creation.
+How do you migrate a virtual machine from one host to another?
+
+Answer: VM migration involves moving a VM from one host to another, typically using live migration tools like VMware vMotion or Hyper-V Live Migration. This is done without downtime for the VM.
+What is high availability in virtualization?
+
+Answer: High availability (HA) ensures that virtual machines remain operational even if a host fails. It is achieved by automatically restarting VMs on other hosts in the cluster.
+**How do you configure virtual
