@@ -90,7 +90,6 @@
             "question": "How do you move a file from one location to another?",
             "answer": "Use Move-Item -Path 'C:\\Source\\File.txt' -Destination 'C:\\Destination\\' to move a file."
         },
-       
         {
             "question": "How do you unlock a user account in Active Directory?",
             "answer": "Use Unlock-ADAccount -Identity 'username' to unlock a user's account."
@@ -146,8 +145,304 @@
         {
             "question": "Create a Security Group:",
             "answer": "New-ADGroup -Name \"SalesGroup\" -GroupScope Global -GroupCategory Security -Path \"OU=Sales,DC=example,DC=com\"\n"
+        },
+        {
+            "question": "How do I Set policy to Unrestricted",
+            "answer": "Set-ExecutionPolicy Unrestricted\n"
+        },
+        {
+            "question": "How do I set execution policy to Bypass for current user",
+            "answer": "Set-ExecutionPolicy Bypass -Scope CurrentUser\n"
         }
     ],
+	
+	
+  "Powershell GPO's": [
+    {
+      "question": "How do you create a new GPO using PowerShell?",
+      "answer": "To create a new Group Policy Object (GPO), use the following command:\nNew-GPO -Name \"My New GPO\" -Comment \"This is a new GPO\""
+    },
+    {
+      "question": "How do you link a GPO to an OU using PowerShell?",
+      "answer": "To link an existing GPO to an Organizational Unit (OU), use the following command:\nNew-GPLink -Name \"My New GPO\" -Target \"OU=MyOU,DC=example,DC=com\""
+    },
+    {
+      "question": "How do you get a list of all GPOs using PowerShell?",
+      "answer": "To list all Group Policy Objects (GPOs) in the domain, use the following command:\nGet-GPO -All"
+    },
+    {
+      "question": "How do you backup a GPO using PowerShell?",
+      "answer": "To backup a specific GPO, use the following command:\nBackup-GPO -Name \"My New GPO\" -Path \"C:\\GPOBackup\"\nTo backup all GPOs, use:\nBackup-GPO -All -Path \"C:\\GPOBackup\""
+    },
+    {
+      "question": "How do you restore a GPO using PowerShell?",
+      "answer": "To restore a GPO from a backup, use the following command:\nRestore-GPO -Name \"My New GPO\" -Path \"C:\\GPOBackup\""
+    },
+    {
+      "question": "How do you delete a GPO using PowerShell?",
+      "answer": "To delete a GPO, use the following command:\nRemove-GPO -Name \"My New GPO\""
+    },
+    {
+      "question": "How do you set a registry-based policy within a GPO using PowerShell?",
+      "answer": "To set a specific policy within a GPO, use the Set-GPRegistryValue command. For example, to set the minimum password length in a GPO, use:\nSet-GPRegistryValue -Name \"My New GPO\" -Key \"HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\" -ValueName \"MinimumPasswordLength\" -Type DWORD -Value 8"
+    },
+    {
+      "question": "How do you retrieve a registry-based policy setting from a GPO using PowerShell?",
+      "answer": "To retrieve a specific setting from a GPO, use the Get-GPRegistryValue command. For example:\nGet-GPRegistryValue -Name \"My New GPO\" -Key \"HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\" -ValueName \"MinimumPasswordLength\""
+    },
+    {
+      "question": "How do you force a Group Policy update using PowerShell?",
+      "answer": "To force a Group Policy update on a local or remote computer, use the following command:\nInvoke-GPUpdate -Computer \"RemoteComputerName\" -Target Computer -Force"
+    },
+    {
+      "question": "How do you block GPO inheritance on an OU using PowerShell?",
+      "answer": "To block GPO inheritance on an OU, use the following command:\nSet-GPInheritance -Target \"OU=MyOU,DC=example,DC=com\" -IsBlocked Yes"
+    },
+    {
+      "question": "How do you enable or disable a GPO link using PowerShell?",
+      "answer": "To enable or disable a GPO link, use the following command:\nSet-GPLink -Name \"My New GPO\" -Target \"OU=MyOU,DC=example,DC=com\" -LinkEnabled Yes\nTo disable the link, set -LinkEnabled to No."
+    },
+    {
+      "question": "How do you enforce a GPO using PowerShell?",
+      "answer": "To enforce a GPO so that it overrides conflicting settings from other GPOs, use the following command:\nSet-GPLink -Name \"My New GPO\" -Target \"OU=MyOU,DC=example,DC=com\" -Enforced Yes"
+    },
+    {
+      "question": "How do you generate a report of GPO settings in PowerShell?",
+      "answer": "To generate a report of GPO settings in HTML format, use the following command:\nGet-GPOReport -Name \"My New GPO\" -ReportType HTML -Path \"C:\\Reports\\MyNewGPOReport.html\""
+    },
+    {
+      "question": "How do you rename a GPO using PowerShell?",
+      "answer": "To rename an existing GPO, use the following command:\nRename-GPO -Name \"Old GPO Name\" -NewName \"New GPO Name\""
+    },
+    {
+      "question": "How do you copy a GPO using PowerShell?",
+      "answer": "To copy a GPO to create a new GPO with similar settings, use the following command:\nCopy-GPO -SourceName \"My New GPO\" -TargetName \"My New GPO - Copy\""
+    },
+    {
+      "question": "How do you set a desktop background using Group Policy in PowerShell?",
+      "answer": "1. Create or get the GPO: $GPO = New-GPO -Name \"Set Desktop Background\" -Comment \"Sets the desktop background for all domain users\"\n2. Set the wallpaper: Set-GPRegistryValue -Name \"Set Desktop Background\" -Key \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\" -ValueName \"Wallpaper\" -Type String -Value \"\\\\server\\share\\wallpaper.jpg\"\n3. Set the wallpaper style: Set-GPRegistryValue -Name \"Set Desktop Background\" -Key \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\" -ValueName \"WallpaperStyle\" -Type String -Value \"2\"\n4. Link the GPO: New-GPLink -Name \"Set Desktop Background\" -Target \"OU=MyOU,DC=example,DC=com\""
+    },
+    {
+      "question": "How do you set a disclaimer message using Group Policy in PowerShell?",
+      "answer": "1. Create or get the GPO: $GPO = New-GPO -Name \"Set Logon Disclaimer\" -Comment \"Sets a disclaimer message for all domain users\"\n2. Set the disclaimer caption: Set-GPRegistryValue -Name \"Set Logon Disclaimer\" -Key \"HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\" -ValueName \"legalnoticecaption\" -Type String -Value \"Warning\"\n3. Set the disclaimer text: Set-GPRegistryValue -Name \"Set Logon Disclaimer\" -Key \"HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\" -ValueName \"legalnoticetext\" -Type String -Value \"Unauthorized access to this system is prohibited. All activities are monitored.\"\n4. Link the GPO: New-GPLink -Name \"Set Logon Disclaimer\" -Target \"OU=MyOU,DC=example,DC=com\""
+    }
+  ],
+
+
+  "Server 2022": [
+    {
+      "question": "How do you deploy Windows Server 2022?",
+      "answer": "1. Insert the Windows Server 2022 installation media and boot the server.\n2. Choose your language, time, and keyboard preferences, then click Next.\n3. Click Install Now.\n4. Select the version of Windows Server 2022 you want to install and click Next.\n5. Accept the license terms and click Next.\n6. Choose Custom for a new installation.\n7. Select the drive where you want to install the server and click Next.\n8. Follow the on-screen instructions to complete the installation.\n9. After installation, log in with the Administrator account.\n10. Configure the server name, IP address, and join it to a domain if necessary."
+    },
+    {
+      "question": "How do you implement and manage Active Directory Domain Services (AD DS) on Windows Server 2022?",
+      "answer": "1. Open Server Manager and click Add roles and features.\n2. Click Next through the wizard until you reach the Server Roles section.\n3. Check Active Directory Domain Services and click Next.\n4. Click Add Features when prompted, then click Next through the remaining screens.\n5. Click Install to install the AD DS role.\n6. After installation, click on the flag icon in Server Manager and select Promote this server to a domain controller.\n7. Choose Add a new forest if this is the first domain controller in the forest, and enter the root domain name.\n8. Click Next and set the Domain Functional Level and Forest Functional Level, then set a Directory Services Restore Mode (DSRM) password.\n9. Continue through the wizard, ensuring that DNS and Global Catalog (GC) options are selected.\n10. Review your selections, then click Install to complete the configuration."
+    },
+    {
+      "question": "How do you implement and manage DHCP on Windows Server 2022?",
+      "answer": "1. Open Server Manager and click Add roles and features.\n2. Proceed through the wizard and select DHCP Server as the role.\n3. Click Next and then Install to add the DHCP role.\n4. After installation, open the DHCP console from the Tools menu.\n5. Right-click the server name and select New Scope.\n6. Follow the wizard to define the scope name, IP address range, and exclusions.\n7. Configure lease duration, DNS settings, and any additional options.\n8. Finish the wizard and activate the scope to start assigning IP addresses."
+    },
+    {
+      "question": "How do you implement and manage DNS on Windows Server 2022?",
+      "answer": "1. Open Server Manager and click Add roles and features.\n2. Proceed through the wizard until you reach the Server Roles section.\n3. Check DNS Server and click Next.\n4. Click Install to add the DNS role.\n5. After installation, open the DNS Manager from the Tools menu in Server Manager.\n6. Expand the server name and right-click Forward Lookup Zones to create a new zone.\n7. Choose the type of zone (Primary, Secondary, or Stub) and click Next.\n8. Enter the domain name for the new zone and click Next.\n9. Configure dynamic updates and finish the zone creation.\n10. You can now add new DNS records (A, CNAME, MX, etc.) by right-clicking the new zone."
+    },
+    {
+      "question": "How do you implement and manage storage on Windows Server 2022?",
+      "answer": "1. Open Server Manager and click Add roles and features.\n2. Proceed through the wizard and select File and Storage Services > File Server.\n3. Click Next and then Install to install the role.\n4. After installation, go to File and Storage Services in Server Manager.\n5. Click Disks to view available storage devices.\n6. Initialize any new disks if necessary, and create a new volume by right-clicking on the disk and selecting New Volume.\n7. Follow the wizard to configure the volume size, drive letter, and file system type (NTFS, ReFS).\n8. Assign a volume label and set up any additional storage options (e.g., deduplication).\n9. Click Create to finalize the storage setup."
+    },
+    {
+      "question": "How do you implement Hyper-V on Windows Server 2022?",
+      "answer": "1. Open Server Manager and click Add roles and features.\n2. Proceed through the wizard until you reach the Server Roles section.\n3. Check Hyper-V and click Next.\n4. Select the network adapters to be used by Hyper-V for virtual switches and click Next.\n5. Click Install to add the Hyper-V role.\n6. After installation, open Hyper-V Manager from the Start menu.\n7. Use Hyper-V Manager to create and manage virtual machines (VMs) on the server."
+    },
+    {
+      "question": "How do you manage Virtual Machines on Windows Server 2022?",
+      "answer": "1. Open Hyper-V Manager from the Start menu.\n2. To create a new VM, click New and select Virtual Machine in the Actions pane.\n3. Follow the wizard to specify the VM name, location, and generation.\n4. Assign memory, configure network settings, and attach a virtual hard disk to the VM.\n5. Choose to install an operating system from an ISO file or physical media.\n6. Click Finish to create the VM, then start the VM and complete the OS installation.\n7. After the OS is installed, configure the VM settings, such as adding additional virtual CPUs, memory, or network adapters."
+    },
+    {
+      "question": "How do you implement and manage Print Servers on Windows Server 2022?",
+      "answer": "1. Open Server Manager and click Add roles and features.\n2. Proceed through the wizard and select Print and Document Services > Print Server.\n3. Click Next and then Install to add the Print Server role.\n4. After installation, go to Print Management in Server Manager.\n5. Right-click Printers and select Add Printer.\n6. Follow the wizard to add a printer by specifying the printer name, driver, and sharing options.\n7. Once the printer is added, you can manage it through Print Management, including setting up permissions and monitoring print jobs."
+    },
+    {
+      "question": "How do you implement an iSCSI Storage Area Network (SAN) on Windows Server 2022?",
+      "answer": "1. Open Server Manager and click Add roles and features.\n2. Proceed through the wizard and select File and Storage Services > iSCSI Target Server.\n3. Click Next and then Install to add the iSCSI Target Server role.\n4. After installation, open the iSCSI Management Console.\n5. Create a new iSCSI target by right-clicking on iSCSI Targets and selecting New iSCSI Target.\n6. Follow the wizard to specify the target name, assign the initiators, and configure authentication settings.\n7. After creating the target, create a new virtual disk by right-clicking on iSCSI Virtual Disks and selecting New iSCSI Virtual Disk.\n8. Follow the wizard to configure the virtual disk size, location, and file system.\n9. Once the virtual disk is created, assign it to the iSCSI target and configure access permissions."
+    },
+    {
+      "question": "How do you implement and manage Failover Clustering on Windows Server 2022?",
+      "answer": "1. Open Server Manager and click Add roles and features.\n2. Proceed through the wizard and select Failover Clustering as a feature.\n3. Click Next and then Install to add the Failover Clustering feature.\n4. After installation, open the Failover Cluster Manager from the Start menu.\n5. Use the Validate Configuration wizard to test the servers that will be part of the cluster.\n6. Follow the wizard to create a new cluster by selecting the servers and configuring the cluster name and IP address.\n7. Once the cluster is created, add roles or services (e.g., File Server, Hyper-V) that need high availability.\n8. Test the failover functionality by moving resources between nodes and verifying that the services remain available."
+    },
+    {
+      "question": "How do you implement a VPN Remote Access solution on Windows Server 2022?",
+      "answer": "1. Open Server Manager and click Add roles and features.\n2. Choose Remote Access and click Next.\n3. Select DirectAccess and VPN (RAS) and click Next.\n4. Follow the wizard to install the required features and roles.\n5. Open the Routing and Remote Access console and right-click the server name.\n6. Select Configure and Enable Routing and Remote Access.\n7. Choose VPN Access in the wizard and configure the VPN settings.\n8. After configuring, start the service and verify that VPN clients can connect."
+    },
+    {
+      "question": "How do you monitor performance on Windows Server 2022 using native tools?",
+      "answer": "1. Open Task Manager to monitor CPU, memory, disk, and network usage in real-time.\n2. Use Resource Monitor for more detailed insights into system performance.\n3. Open Performance Monitor to set up real-time monitoring and logging of specific performance counters (e.g., Processor, Memory, Disk).\n4. Use the Event Viewer to review system logs and identify any performance-related errors or warnings.\n5. Set up alerts in Performance Monitor to notify you when specific thresholds are exceeded.\n6. Use built-in tools like Disk Management and Task Scheduler to manage disk performance and schedule maintenance tasks."
+    },
+    {
+      "question": "How do you implement Disaster Recovery on Windows Server 2022 using Windows Server Backup?",
+      "answer": "1. Open Server Manager and click Add roles and features.\n2. Select Windows Server Backup as a feature and click Next.\n3. After installation, open Windows Server Backup from the Tools menu in Server Manager.\n4. Click Local Backup and then Backup Once or Backup Schedule to create a new backup job.\n5. Choose Custom and click Next.\n6. Select the volumes or files to include in the backup.\n7. Choose a backup destination, such as a local disk, network share, or external storage.\n8. Configure the backup schedule and retention policy as needed.\n9. Click Finish to start the backup process.\n10. To restore data, use the Recover option in Windows Server Backup and follow the wizard to select the backup source and restore location."
+    },
+    {
+      "question": "How do you deploy Windows Server 2022 on an Azure Virtual Machine?",
+      "answer": "1. Log in to the Azure portal and navigate to the Virtual Machines section.\n2. Click Create and select Virtual Machine from the menu.\n3. Choose a resource group, VM name, region, and availability options.\n4. Select an image from the Azure Marketplace (e.g., Windows Server 2022) or use a custom image.\n5. Configure the VM size, storage, and network settings.\n6. Set up authentication with a password or SSH key pair.\n7. Configure management options, such as monitoring and auto-shutdown.\n8. Review the settings and click Create to deploy the virtual machine.\n9. Manage the VM using the Azure portal, PowerShell, or Azure CLI."
+    },
+    {
+      "question": "How do you create Storage Accounts in Azure?",
+      "answer": "1. Log in to the Azure portal and navigate to the Storage Accounts section.\n2. Click Create to start the process of creating a new storage account.\n3. Choose a subscription, resource group, and a globally unique name for the storage account.\n4. Select a region and performance tier (Standard or Premium).\n5. Choose the account kind (e.g., StorageV2, BlobStorage) and replication options (e.g., LRS, GRS).\n6. Configure access and security options, such as enabling blob soft delete or Azure AD authentication.\n7. Review the settings and click Create to deploy the storage account."
+    },
+    {
+      "question": "How do you create File Shares in Azure?",
+      "answer": "1. Log in to the Azure portal and navigate to the Storage Accounts section.\n2. Select the storage account where you want to create a file share.\n3. Under File service, click on File shares and then click + File share.\n4. Enter a name for the file share and specify the quota (maximum storage limit).\n5. Click Create to create the file share.\n6. Once the file share is created, you can upload files directly to it or map it as a network drive using the provided UNC path."
+    },
+    {
+      "question": "How do you sync Active Directory Domain Services to Microsoft Entra ID (formerly Azure AD) using Azure AD Connect?",
+      "answer": "1. Install the Azure AD Connect tool on a server in your on-premises environment.\n2. Launch Azure AD Connect and follow the wizard to configure the synchronization settings.\n3. Choose the express or custom setup based on your requirements.\n4. Enter your on-premises AD and Azure AD credentials to connect the directories.\n5. Configure user sign-in options (e.g., password hash synchronization, pass-through authentication, or federation).\n6. Select the on-premises organizational units (OUs) to synchronize with Azure AD.\n7. Configure any additional synchronization settings, such as filtering or attribute mapping.\n8. Complete the wizard to start the synchronization process.\n9. Monitor the synchronization status in the Azure AD Connect tool and Azure portal."
+    }
+  ],
+
+
+  "Powershell Mail Management": [
+    {
+      "question": "How do you create a new mailbox in Exchange Online using PowerShell?",
+      "answer": "Use the New-Mailbox cmdlet:\nNew-Mailbox -Name 'John Doe' -UserPrincipalName johndoe@example.com -Password (ConvertTo-SecureString 'Password123!' -AsPlainText -Force) -FirstName 'John' -LastName 'Doe'"
+    },
+    {
+      "question": "How do you send an email using PowerShell in Exchange Online?",
+      "answer": "Use the Send-MailMessage cmdlet:\nSend-MailMessage -From 'admin@example.com' -To 'user@example.com' -Subject 'Test Email' -Body 'This is a test email.' -SmtpServer 'smtp.office365.com' -UseSsl -Credential (Get-Credential)"
+    },
+    {
+      "question": "How do you add an SMTP connector in Exchange Online using PowerShell?",
+      "answer": "Use the New-OutboundConnector cmdlet:\nNew-OutboundConnector -Name 'MyConnector' -ConnectorType 'OnPremises' -TlsSettings 'Mandatory' -SmartHosts 'smtp.smart.com' -SmartHostAuthMechanism 'None'"
+    },
+    {
+      "question": "How do you delete a mailbox in Exchange Online using PowerShell?",
+      "answer": "Use the Remove-Mailbox cmdlet:\nRemove-Mailbox -Identity 'johndoe@example.com'"
+    },
+    {
+      "question": "How do you share a mailbox in Exchange Online using PowerShell?",
+      "answer": "Use the Add-MailboxPermission cmdlet:\nAdd-MailboxPermission -Identity 'SharedMailbox@example.com' -User 'JohnDoe@example.com' -AccessRights FullAccess -InheritanceType All"
+    },
+    {
+      "question": "How do you set up an email signature for a user in Exchange Online using PowerShell?",
+      "answer": "Use the Set-MailboxMessageConfiguration cmdlet:\nSet-MailboxMessageConfiguration -Identity 'johndoe@example.com' -SignatureHtml '<p>Best regards,<br>John Doe</p>'"
+    },
+    {
+      "question": "How do you set an automatic reply (out of office) in Exchange Online using PowerShell?",
+      "answer": "Use the Set-MailboxAutoReplyConfiguration cmdlet:\nSet-MailboxAutoReplyConfiguration -Identity 'johndoe@example.com' -AutoReplyState Enabled -InternalMessage 'I am currently out of the office.' -ExternalMessage 'I am currently out of the office.'"
+    },
+    {
+      "question": "How do you create a distribution group in Exchange Online using PowerShell?",
+      "answer": "Use the New-DistributionGroup cmdlet:\nNew-DistributionGroup -Name 'Sales Team' -Alias 'sales' -PrimarySmtpAddress 'sales@example.com'"
+    },
+    {
+      "question": "How do you add a member to a distribution group in Exchange Online using PowerShell?",
+      "answer": "Use the Add-DistributionGroupMember cmdlet:\nAdd-DistributionGroupMember -Identity 'Sales Team' -Member 'JohnDoe@example.com'"
+    },
+    {
+      "question": "How do you enable mailbox auditing for a user in Exchange Online using PowerShell?",
+      "answer": "Use the Set-Mailbox cmdlet:\nSet-Mailbox -Identity 'johndoe@example.com' -AuditEnabled $true"
+    }
+  ],
+
+
+  "Powershell Mailbox Backup and DR": [
+    {
+      "question": "How do you export a mailbox to a PST file in Exchange Online using PowerShell?",
+      "answer": "Use the New-MailboxExportRequest cmdlet:\nNew-MailboxExportRequest -Mailbox 'johndoe@example.com' -FilePath '\\\\fileshare\\exports\\johndoe.pst'"
+    },
+    {
+      "question": "How do you import a PST file into a mailbox in Exchange Online using PowerShell?",
+      "answer": "Use the New-MailboxImportRequest cmdlet:\nNew-MailboxImportRequest -Mailbox 'johndoe@example.com' -FilePath '\\\\fileshare\\imports\\johndoe.pst'"
+    },
+    {
+      "question": "How do you recover a deleted mailbox in Exchange Online using PowerShell?",
+      "answer": "Use the New-MailboxRestoreRequest cmdlet:\nNew-MailboxRestoreRequest -SourceMailbox 'DeletedMailbox' -TargetMailbox 'johndoe@example.com'"
+    },
+    {
+      "question": "How do you backup all mailboxes to PST files in Exchange Online using PowerShell?",
+      "answer": "Use the Get-Mailbox and New-MailboxExportRequest cmdlets:\nGet-Mailbox | ForEach-Object { New-MailboxExportRequest -Mailbox $_.Alias -FilePath \"\\\\fileshare\\exports\\$($_.Alias).pst\" }"
+    },
+    {
+      "question": "How do you schedule a mailbox backup using Task Scheduler and PowerShell?",
+      "answer": "1. Create a PowerShell script with the New-MailboxExportRequest cmdlets for the mailboxes you want to back up.\n2. Open Task Scheduler and create a new task.\n3. Set the trigger for the desired backup schedule.\n4. Set the action to start a program and point it to PowerShell.exe with the script as an argument.\n5. Save the task to schedule the mailbox backup."
+    },
+    {
+      "question": "How do you set mailbox retention policies using PowerShell?",
+      "answer": "Use the Set-Mailbox cmdlet:\nSet-Mailbox -Identity 'johndoe@example.com' -RetentionPolicy 'Default MRM Policy'"
+    },
+    {
+      "question": "How do you create a new retention policy in Exchange Online using PowerShell?",
+      "answer": "Use the New-RetentionPolicy cmdlet:\nNew-RetentionPolicy -Name 'Custom Retention Policy' -RetentionPolicyTagLinks 'Default 2 year move to archive'"
+    },
+    {
+      "question": "How do you apply a retention policy to a mailbox using PowerShell?",
+      "answer": "Use the Set-Mailbox cmdlet:\nSet-Mailbox -Identity 'johndoe@example.com' -RetentionPolicy 'Custom Retention Policy'"
+    },
+    {
+      "question": "How do you check the status of a mailbox export request using PowerShell?",
+      "answer": "Use the Get-MailboxExportRequest cmdlet:\nGet-MailboxExportRequest | Get-MailboxExportRequestStatistics"
+    },
+    {
+      "question": "How do you remove completed mailbox export requests using PowerShell?",
+      "answer": "Use the Remove-MailboxExportRequest cmdlet:\nGet-MailboxExportRequest | Where-Object { $_.Status -eq 'Completed' } | Remove-MailboxExportRequest"
+    }
+  ],
+
+
+  "DNS Management": [
+    {
+      "question": "How do you create a DNS zone in Windows Server?",
+      "answer": "Open the DNS Manager from the Server Manager or Administrative Tools.\nRight-click on the server name and select New Zone.\nFollow the New Zone Wizard to create a Primary, Secondary, or Stub zone.\nEnter the zone name and specify the zone file location.\nConfigure the zone replication scope and Dynamic Updates settings.\nComplete the wizard to create the DNS zone."
+    },
+    {
+      "question": "How do you add an A record in DNS?",
+      "answer": "Open the DNS Manager from the Server Manager or Administrative Tools.\nExpand the DNS server and the Forward Lookup Zones.\nRight-click on the zone where you want to add the A record and select New Host (A or AAAA).\nEnter the hostname and IP address for the A record.\nCheck the box to create a PTR record if needed.\nClick Add Host to create the A record."
+    },
+    {
+      "question": "How do you add DNS forwarders in Windows Server?",
+      "answer": "Open the DNS Manager from the Server Manager or Administrative Tools.\nRight-click on the server name and select Properties.\nGo to the Forwarders tab and click Edit.\nEnter the IP addresses of the DNS servers you want to forward queries to.\nClick OK to save the forwarders."
+    },
+    {
+      "question": "How do you configure DNS scavenging in Windows Server?",
+      "answer": "Open the DNS Manager from the Server Manager or Administrative Tools.\nRight-click on the server name and select Properties.\nGo to the Advanced tab and check the box to enable automatic scavenging of stale records.\nSet the scavenging interval and click OK.\nRight-click on a DNS zone and select Properties.\nGo to the General tab and click Aging.\nEnable scavenging for this zone and set the No-refresh and Refresh intervals.\nClick OK to apply the settings."
+    },
+    {
+      "question": "How do you configure DNS delegation in Windows Server?",
+      "answer": "Open the DNS Manager from the Server Manager or Administrative Tools.\nRight-click on the zone where you want to create the delegation and select New Delegation.\nFollow the New Delegation Wizard to specify the delegated domain name.\nEnter the DNS servers responsible for the delegated domain.\nComplete the wizard to create the delegation."
+    },
+    {
+      "question": "How do you configure DNS round-robin in Windows Server?",
+      "answer": "Open the DNS Manager from the Server Manager or Administrative Tools.\nRight-click on the server name and select Properties.\nGo to the Advanced tab and ensure that the Enable Round Robin checkbox is selected.\nCreate multiple A records with the same hostname but different IP addresses.\nThe DNS server will distribute the queries to these IP addresses in a round-robin manner."
+    },
+    {
+      "question": "How do you configure DNS recursion in Windows Server?",
+      "answer": "Open the DNS Manager from the Server Manager or Administrative Tools.\nRight-click on the server name and select Properties.\nGo to the Advanced tab and configure the Enable Recursion checkbox.\nIf you want to disable recursion, uncheck the Enable Recursion checkbox.\nClick OK to save the settings."
+    },
+    {
+      "question": "How do you configure conditional forwarders in DNS?",
+      "answer": "Open the DNS Manager from the Server Manager or Administrative Tools.\nRight-click on the Conditional Forwarders node and select New Conditional Forwarder.\nEnter the DNS domain for which you want to forward queries.\nSpecify the IP addresses of the DNS servers to which you want to forward queries.\nClick OK to create the conditional forwarder."
+    },
+    {
+      "question": "How do you configure DNSSEC in Windows Server?",
+      "answer": "Open the DNS Manager from the Server Manager or Administrative Tools.\nRight-click on the zone you want to secure and select DNSSEC > Sign the Zone.\nFollow the Zone Signing Wizard to configure the DNSSEC settings.\nChoose the signing key and specify the key rollover and signature settings.\nComplete the wizard to sign the zone and enable DNSSEC."
+    },
+    {
+      "question": "How do you troubleshoot DNS issues using nslookup?",
+      "answer": "Open Command Prompt and type nslookup to enter the nslookup interactive mode.\nUse the server command to specify the DNS server you want to query.\nUse the set type command to specify the type of DNS record you want to query (e.g., A, MX, CNAME).\nEnter the domain name you want to query and press Enter.\nAnalyze the results to determine if the DNS server is resolving the domain correctly.\nExit nslookup by typing exit."
+    }
+  ],
+
+
+
+
+
+  
+
+
+	
+	
+	
+	
     "More General Server Management": [
         {
             "question": "How do you configure an NTP server on a Windows Server?",
@@ -418,10 +713,8 @@
             "answer": "Write scripts that automate the failover process, such as switching DNS records\n, starting VMs at the DR site\n, and adjusting network configurations.\n Use Task Scheduler or orchestrator tools like Azure Site Recovery to trigger the scripts during a failover."
         }
     ],
-	
-	
     "PowerShell Users": [
-		{
+        {
             "question": "How do you create a new user in Active Directory?",
             "answer": "Use New-ADUser -Name 'UserName' -GivenName 'FirstName' -Surname 'LastName' -SamAccountName 'username' -UserPrincipalName 'username@domain.com' to create a new user."
         },
@@ -429,8 +722,6 @@
             "question": "How do you reset a user's password in Active Directory?",
             "answer": "Use Set-ADAccountPassword -Identity 'username' -Reset -NewPassword (ConvertTo-SecureString 'NewPassword' -AsPlainText -Force) to reset a user's password."
         },
-	
-	
         {
             "question": "How do you create an Organizational Unit (OU) using PowerShell?",
             "answer": "Use the following command:\nNew-ADOrganizationalUnit -Name 'Sales' -Path 'DC=example,DC=com'\nThis creates an OU named 'Sales' in the domain 'example.com'."
@@ -492,10 +783,6 @@
             "answer": "Use the following command:\nRemove-ADOrganizationalUnit -Identity 'OU=Sales,DC=example,DC=com'\nThis deletes the 'Sales' OU. Be cautious as this will remove all objects within the OU."
         }
     ],
-
-
-	
-	
     "Security": [
         {
             "question": "How do you configure Windows Firewall with Advanced Security?",
